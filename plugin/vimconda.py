@@ -286,13 +286,14 @@ def conda_startup_env():
         print('Found more than one matching env, '
               'this should never happen.')
     elif len(roots) == 0:
-        print('\nCould not find a matching env in the list. '
-              '\nThis probably means that you are using a local '
-              '\n(prefix) Conda env.'
-              '\n '
-              '\nThis should be fine, but changing to a named env '
-              '\nmay make it difficult to reactivate the prefix env.'
-              '\n ')
+        if not msg_suppress:
+            print('\nCould not find a matching env in the list. '
+                  '\nThis probably means that you are using a local '
+                  '\n(prefix) Conda env.'
+                  '\n '
+                  '\nThis should be fine, but changing to a named env '
+                  '\nmay make it difficult to reactivate the prefix env.'
+                  '\n ')
         vim.command('let g:conda_startup_was_prefix = 1')
     else:
         root = roots[0]
